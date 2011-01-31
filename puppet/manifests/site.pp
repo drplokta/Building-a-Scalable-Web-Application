@@ -46,7 +46,7 @@ file 	{ "/etc/apt/sources.list":
 }
 
 #Define nodes
-node "dev1.localdomain" {
+node 	{ "dev1.localdomain":
 	include standard
 }
 
