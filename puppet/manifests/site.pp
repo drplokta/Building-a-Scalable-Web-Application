@@ -45,6 +45,12 @@ file 	{ "/etc/apt/sources.list":
 	group => root,
 }
 
+cron { puppet-apply:
+	command => "/usr/bin/git --git-dir=/root/Building-a-Scalable-Web-Application/.git pull origin master; /usr/bin/puppet apply /root/Building-a-Scalable-Web-Application/puppet/manifests/site.pp",
+	user => root,
+	minute => [0,5,10,15,20,25,30,35,40,45,50,55],
+}
+
 #Define nodes
 node 	"dev1.localdomain" {
 	include standard
