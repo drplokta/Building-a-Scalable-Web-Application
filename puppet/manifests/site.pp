@@ -2,7 +2,7 @@ import "classes.pp"
 
 # disable IPV6
 file {	"/etc/default/grub":
-	source => "puppet:///files/grub",
+	source => "/root/Building-a-Scalable-Web-Application/puppet/files/grub",
 	owner => root,
 	group => root,
 }
@@ -14,7 +14,7 @@ exec {	"/usr/sbin/update-grub":
 
 #Fix sshd config
 file { "/etc/ssh/sshd_config":
-	source => "puppet:///files/sshd_config",
+	source => "/root/Building-a-Scalable-Web-Application/puppet/files/sshd_config",
 	owner => root,
 	group => root,
 }
@@ -27,7 +27,7 @@ service { "ssh":
 
 #set authorized_keys for mikes
 file { "/home/mikes/.ssh/authorized_keys":
-	source => "puppet:///files/mikes/authorized_keys",
+	source => "/root/Building-a-Scalable-Web-Application/puppet/files/mikes/authorized_keys",
 	owner => mikes,
 	group => mikes,
 }
@@ -40,13 +40,13 @@ exec { "update-alternatives --set editor /usr/bin/vim.basic":
 
 #Set sources for apt
 file 	{ "/etc/apt/sources.list":
-	source => "puppet:///files/sources.list:,
+	source => "/root/Building-a-Scalable-Web-Application/puppet/files/sources.list",
 	owner => root,
 	group => root,
 }
 
 #Define nodes
-node 	{ "dev1.localdomain":
+node 	"dev1.localdomain" {
 	include standard
 }
 
