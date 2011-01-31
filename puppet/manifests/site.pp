@@ -4,7 +4,7 @@ import "classes.pp"
 file {	"/etc/default/grub":
 	source => "/root/Building-a-Scalable-Web-Application/puppet/files/grub",
 	owner => root,
-	group => adm,
+	group => root,
 }
 
 exec {	"/usr/sbin/update-grub":
