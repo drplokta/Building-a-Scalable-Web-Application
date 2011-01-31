@@ -25,6 +25,13 @@ service { "ssh":
 	subscribe => File["/etc/ssh/sshd_config"],
 }
 
+#set authorized_keys for mikes
+file { "/home/mikes/..sh/authorized_keys":
+	source => puppet:///files/mikes/authorized_keys",
+	owner => mikes,
+	group => mikes,
+}
+
 #Set default editor
 exec { "update-alternatives --set editor /usr/bin/vim.basic":
 	path => "/bin:/sbin:/usr/bin:/usr/sbin",
@@ -38,8 +45,8 @@ file 	{ "/etc/apt/sources.list":
 	group => root,
 }
 
+#Define nodes
 node "dev1.localdomain" {
 	include standard
 }
-
 
