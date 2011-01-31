@@ -26,8 +26,8 @@ service { "ssh":
 }
 
 #set authorized_keys for mikes
-file { "/home/mikes/..sh/authorized_keys":
-	source => puppet:///files/mikes/authorized_keys",
+file { "/home/mikes/.ssh/authorized_keys":
+	source => "puppet:///files/mikes/authorized_keys",
 	owner => mikes,
 	group => mikes,
 }
