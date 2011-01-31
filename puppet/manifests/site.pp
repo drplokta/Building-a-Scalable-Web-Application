@@ -45,8 +45,16 @@ file 	{ "/etc/apt/sources.list":
 	group => root,
 }
 
+#Apply changes every five minutes
+file 	{ "/root/puppet-update.sh":
+	source => "/root/Building-a-Scalable-Web-Application/puppet/files/puppet-update.sh",
+	owner => root,
+	group => root,
+	mode => 755,
+}
+
 cron { puppet-apply:
-	command => "/usr/bin/git --git-dir=/root/Building-a-Scalable-Web-Application/.git pull origin master; /usr/bin/puppet apply /root/Building-a-Scalable-Web-Application/puppet/manifests/site.pp",
+	command => "/root/puppet-update.sh",
 	user => root,
 	minute => [0,5,10,15,20,25,30,35,40,45,50,55],
 }
