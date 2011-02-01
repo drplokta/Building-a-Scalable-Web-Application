@@ -1,17 +1,5 @@
 import "classes.pp"
 
-# disable IPV6
-file {	"/etc/default/grub":
-	source => "/root/Building-a-Scalable-Web-Application/puppet/files/grub",
-	owner => root,
-	group => root,
-}
-
-exec {	"/usr/sbin/update-grub":
-	subscribe => File["/etc/default/grub"],
-	refreshonly => true,
-}
-
 #Fix sshd config
 file { "/etc/ssh/sshd_config":
 	source => "/root/Building-a-Scalable-Web-Application/puppet/files/sshd_config",
@@ -36,6 +24,7 @@ file { "/home/mikes/.ssh/authorized_keys":
 exec { "update-alternatives --set editor /usr/bin/vim.basic":
 	path => "/bin:/sbin:/usr/bin:/usr/sbin",
 	unless => "test /etc/alternatives/editor -ef /usr/bin/vim.basic",
+	require => Package["vim"],
 }
 
 #Set sources for apt
