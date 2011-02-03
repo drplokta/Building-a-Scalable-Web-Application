@@ -1,7 +1,12 @@
 class standard {
-	package { ["puppet","git","sudo","screen","vim",
-	"unzip"]:
-		ensure => installed,
-	}
+	include packages
+        include grub
+        include ssh
+        include apt
+	include puppet-update
+	include users
+	include users::people
+	include users::admin
+	include vim
 }
 
