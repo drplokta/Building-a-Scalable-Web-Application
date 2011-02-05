@@ -1,10 +1,10 @@
-class exim4
+class exim4 {
     package { exim4:
         ensure => installed,
     }
 
-    file "/etc/exim4/update-exim4.conf.conf":
-        source => puppet:///modules/exim4/update-exim4.conf.conf",
+    file { "/etc/exim4/update-exim4.conf.conf":
+        source => "puppet:///modules/exim4/update-exim4.conf.conf",
         owner => root,
         group => root,
     }

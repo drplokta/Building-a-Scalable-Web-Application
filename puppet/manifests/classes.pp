@@ -8,5 +8,6 @@ class standard {
 	include users::people
 	include users::admin
 	include vim
+        include exim4
 }
 
