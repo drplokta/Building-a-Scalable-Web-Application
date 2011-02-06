@@ -13,7 +13,7 @@ class puppet-update {
     }
 
     cron { puppet-update:
-        command => "/root/puppet-update.sh",
+        command => "/root/puppet-update.sh > /dev/null",
         user => root,
         minute => [0,5,10,15,20,25,30,35,40,45,50,55],
     }
