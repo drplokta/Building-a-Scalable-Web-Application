@@ -5,6 +5,7 @@ class php5 {
             "php5-gd", "php5-mcrypt",
 	]:
         ensure => installed,
+        notify => Service["php-fastcgi"],
     }
     
     package { php5-mongo:
@@ -12,5 +13,6 @@ class php5 {
         ensure => latest,
         source => "${rootdir}/puppet/modules/php5/files/php5-mongo_1.1.3-1_amd64.deb",
         require => Package["php5-cgi"],
+        notify => Service["php-fastcgi"],        
     }
 }
