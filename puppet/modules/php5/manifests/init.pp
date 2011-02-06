@@ -5,4 +5,11 @@ class php5 {
 	]:
         ensure => installed,
     }
+    
+    package { php5-mongo:
+        provider => dpkg,
+        ensure => latest,
+        source => "${rootdir}/puppet/modules/php5/files/php5-mongo_1.1.3-1_amd64.deb",
+        require => Package["php5-cgi"],
+    }
 }
