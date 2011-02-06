@@ -10,6 +10,7 @@ class standard {
 	include vim
     include exim4
     include ufw
+    include git
     
     # Add mongodb.org apt key
     apt::key { "7F0CEB10":
