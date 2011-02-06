@@ -1,5 +1,5 @@
 class puppet-update {
-    package { ["puppet", "git"]:
+    package { ["puppet"]:
         ensure => installed,
     }
 
