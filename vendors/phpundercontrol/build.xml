@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpUnderControl" basedir="." default="build">
+
+    <!--
+        Include some external properties
+    -->
+    <property file="build.properties" />
+
+    <!--
+        Define some common directories and settings
+    -->
+    <property name="builddir" value="${basedir}/../build" />
+
+    <!--
+        Main build target for this project.
+    -->
+    <target name="build" depends="update,apidoc,test-static,test-runtime" />
+
+    <!--
+        Creates the main distributables and tests the project
+    -->
+    <target name="dist" depends="build,bundle" />
+
+    <!--
+        Prepares the temporary build environment.
+    -->
+    <target name="prepare" depends="clean,init" />
+
+    <!--
+        Create the required build directories
+    -->
+    <target name="init">
+        <mkdir dir="${builddir}" />
+        <mkdir dir="${builddir}/api" />
+        <mkdir dir="${builddir}/charts" />
+        <mkdir dir="${builddir}/coverage" />
+        <mkdir dir="${builddir}/dist" />
+        <mkdir dir="${builddir}/logs" />
+        <mkdir dir="${builddir}/phpcb" />
+    </target>
+
+    <!--
+        Removes all temporary build artifacts
+    -->
+    <target name="clean">
+        <delete dir="${builddir}" />
+    </target>
+
+    <!--
+        Update base directory from source
+    -->
+    <target name="update" depends="prepare">
+        <exec executable="git" dir="${basedir}">
+            <arg line="pull" />
+        </exec>
+    </target>
+
+    <!--
+        Generates the api documentation for the project's source
+    -->
+    <target name="apidoc" depends="prepare">
+        <exec executable="phpdoc">
+            <arg line="-ue on
+                       --target ${builddir}/api
+                       --output HTML:Phpuc:phpuc
+                       --templatebase ${basedir}/data/phpdoc
+                       --directory ${basedir}/src" />
+        </exec>
+    </target>
+
+    <!--
+        Executes several static tests against the project source.
+    -->
+    <target name="test-static" depends="prepare">
+        <parallel>
+            <antcall target="lint" />
+            <antcall target="phpmd" />
+            <antcall target="phpcpd" />
+            <antcall target="checkstyle" />
+        </parallel>
+        <!-- Do not run phpmd and pdepend parallel, there is a concurrency problem -->
+        <antcall target="pdepend" />
+    </target>
+
+    <!--
+        Performs a simple syntax check against the project's source code.
+    -->
+    <target name="lint">
+        <apply executable="php" logerror="true" failonerror="true">
+            <arg value="-l" />
+            <fileset dir="${basedir}">
+                <include name="tests/**/*.php" />
+                <include name="src/**/*.php" />
+                <exclude name="tests/run/**/*.php" />
+            </fileset>
+        </apply>
+    </target>
+
+    <!--
+        Checks that the project source matches the coding guidelines
+    -->
+    <target name="checkstyle" depends="init">
+        <exec executable="phpcs" failonerror="false">
+            <arg line="--report=checkstyle
+                       --standard=Mapi
+                       --report-file=${builddir}/logs/checkstyle.xml
+                       ${basedir}/src" />
+        </exec>
+    </target>
+
+    <!--
+        Checks that the project source does not contain any mess
+    -->
+    <target name="phpmd" depends="init">
+        <exec executable="phpmd" failonerror="false">
+            <arg line="${basedir}/src
+                       xml
+                       codesize,unusedcode,naming
+                       --reportfile ${builddir}/logs/pmd.xml" />
+        </exec>
+    </target>
+
+    <!--
+        Checks that the project source does not contain code clones
+    -->
+    <target name="phpcpd" depends="init">
+        <exec executable="phpcpd" failonerror="false">
+            <arg line="--log-pmd ${builddir}/logs/pmd-cpd.xml
+                       ${basedir}/src" />
+        </exec>
+    </target>
+
+    <!--
+        Checks several software metrics for the project source
+    -->
+    <target name="pdepend" depends="init">
+        <exec executable="pdepend" failonerror="false">
+            <arg line="--summary-xml=${builddir}/logs/pdepend.xml
+                       --jdepend-xml=${builddir}/logs/jdepend.xml
+                       --jdepend-chart=${builddir}/charts/jdepend.svg
+                       --overview-pyramid=${builddir}/charts/overview-pyramid.svg
+                       --coderank-mode=inheritance,property,method
+                       ${basedir}/src" />
+        </exec>
+    </target>
+
+    <!--
+        Performs a set of runtime tests against the project's source
+    -->
+    <target name="test-runtime" depends="prepare">
+        <antcall target="phpunit" />
+    </target>
+
+    <!--
+        Executes the unit tests for the project under test.
+    -->
+    <target name="phpunit">
+        <exec executable="phpunit" failonerror="true" dir="${basedir}/tests">
+            <arg line="--process-isolation
+                       --log-junit ${builddir}/logs/junit.xml
+                       --coverage-clover ${builddir}/logs/coverage.xml
+                       --coverage-html ${builddir}/coverage" />
+        </exec>
+    </target>
+
+    <target name="build-label" depends="build-label-ci,build-label-non-ci" />
+
+    <target name="build-label-ci" if="continuous-integration">
+        <buildnumber />
+        <property name="build.label" value="build${build.number}" />
+    </target>
+
+    <target name="build-label-non-ci" unless="continuous-integration">
+        <property name="build.label" value="" />
+    </target>
+
+
+    <target name="bundle" depends="build-label,bundle-pear-archive,bundle-zip-archive" />
+
+    <target name="bundle-prepare" depends="prepare">
+        <copy todir="${builddir}/temp">
+            <fileset dir="${basedir}">
+                <include name="**/*.*" />
+                <include name="CHANGELOG" />
+                <include name="LICENSE" />
+                <exclude name=".git/**" />
+                <exclude name=".gitignore" />
+                <exclude name="build" />
+                <exclude name="config.properties" />
+                <exclude name="bin/clearSetup.php" />
+                <exclude name="*.tgz" />
+                <exclude name="*.zip" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="bundle-pear-archive" depends="bundle-prepare">
+        <exec executable="php" failonerror="true">
+            <arg line="${builddir}/temp/bin/package.php ${builddir}/temp" />
+        </exec>
+
+        <tstamp>
+            <format property="bundle-time" pattern="yyyy-MM-dd" />
+        </tstamp>
+
+        <copy file="${builddir}/temp/package.xml" tofile="${builddir}/temp/package2.xml">
+            <filterchain>
+                <replaceregex pattern="lead&gt;(\s+)&lt;date&gt;(.*)&lt;/date"
+                              replace="lead&gt;\1&lt;date&gt;${bundle-time}&lt;/date"
+                              flags="m"
+                              byline="false">
+                </replaceregex>
+                <replaceregex pattern="lead&gt;(\s+)&lt;date&gt;(.*)&lt;/date&gt;(\s+)&lt;version&gt;(\s+)&lt;release&gt;(.+)&lt;"
+                              replace="lead&gt;\1&lt;date&gt;\2&lt;/date&gt;\3&lt;version&gt;\4&lt;release&gt;${project.version}${build.label}&lt;"
+                              flags="m"
+                              byline="false">
+                </replaceregex>
+            </filterchain>
+        </copy>
+
+        <exec executable="pear" failonerror="true" dir="${builddir}/temp">
+            <arg line="package package2.xml" />
+        </exec>
+
+        <move file="${builddir}/temp/${ant.project.name}-${project.version}${build.label}.tgz"
+              todir="${builddir}/dist/" />
+
+    </target>
+
+    <target name="bundle-zip-archive" depends="bundle-prepare">
+        <zip destfile="${builddir}/dist/${ant.project.name}-${project.version}${build.label}.zip">
+            <fileset dir="${builddir}/temp">
+                <include name="**/*.*" />
+            </fileset>
+        </zip>
+    </target>
+
+</project>

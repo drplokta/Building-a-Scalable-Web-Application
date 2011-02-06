@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1207577544" phpunit="3.2.18">
+  <project name="phpucMergeCodeTest" timestamp="1207577544">
+    <file name="/home/manu/Projects/workspace.zend-studio/phpUnderControl/trunk/docs/log-merge/MergeCodeHelper.php">
+      <class name="phpucMergeCodeHelper" namespace="global" fullPackage="PhpUnderControl.Documentation" category="QualityAssurance" package="PhpUnderControl" subpackage="Documentation">
+        <metrics methods="3" coveredmethods="1" statements="8" coveredstatements="1" elements="11" coveredelements="2"/>
+      </class>
+      <line num="68" type="method" count="0"/>
+      <line num="70" type="stmt" count="0"/>
+      <line num="78" type="method" count="0"/>
+      <line num="80" type="stmt" count="0"/>
+      <line num="82" type="stmt" count="0"/>
+      <line num="84" type="stmt" count="0"/>
+      <line num="92" type="method" count="1"/>
+      <line num="94" type="stmt" count="1"/>
+      <metrics loc="96" ncloc="23" executablelines="5" executedlines="1" classes="1" methods="3" coveredmethods="1" statements="8" coveredstatements="1" elements="11" coveredelements="2"/>
+    </file>
+    <file name="/home/manu/Projects/workspace.zend-studio/phpUnderControl/trunk/docs/log-merge/MergeCode.php">
+      <class name="phpucMergeCode" namespace="global" fullPackage="PhpUnderControl.Documentation" category="QualityAssurance" package="PhpUnderControl" subpackage="Documentation">
+        <metrics methods="3" coveredmethods="3" statements="55" coveredstatements="18" elements="58" coveredelements="21"/>
+      </class>
+      <line num="100" type="method" count="1"/>
+      <line num="102" type="stmt" count="1"/>
+      <line num="104" type="stmt" count="1"/>
+      <line num="105" type="stmt" count="1"/>
+      <line num="106" type="stmt" count="1"/>
+      <line num="107" type="stmt" count="0"/>
+      <line num="108" type="stmt" count="0"/>
+      <line num="109" type="stmt" count="1"/>
+      <line num="110" type="stmt" count="1"/>
+      <line num="111" type="stmt" count="0"/>
+      <line num="112" type="stmt" count="0"/>
+      <line num="115" type="stmt" count="1"/>
+      <line num="117" type="stmt" count="1"/>
+      <line num="128" type="method" count="1"/>
+      <line num="130" type="stmt" count="1"/>
+      <line num="133" type="stmt" count="1"/>
+      <line num="134" type="stmt" count="1"/>
+      <line num="135" type="stmt" count="1"/>
+      <line num="136" type="stmt" count="0"/>
+      <line num="137" type="stmt" count="0"/>
+      <line num="138" type="stmt" count="1"/>
+      <line num="139" type="stmt" count="1"/>
+      <line num="140" type="stmt" count="0"/>
+      <line num="141" type="stmt" count="0"/>
+      <line num="144" type="stmt" count="1"/>
+      <line num="146" type="stmt" count="1"/>
+      <line num="148" type="stmt" count="0"/>
+      <line num="149" type="stmt" count="0"/>
+      <line num="150" type="stmt" count="0"/>
+      <line num="151" type="stmt" count="0"/>
+      <line num="152" type="stmt" count="0"/>
+      <line num="153" type="stmt" count="0"/>
+      <line num="154" type="stmt" count="0"/>
+      <line num="155" type="stmt" count="0"/>
+      <line num="156" type="stmt" count="0"/>
+      <line num="157" type="stmt" count="0"/>
+      <line num="158" type="stmt" count="0"/>
+      <line num="159" type="stmt" count="0"/>
+      <line num="160" type="stmt" count="0"/>
+      <line num="161" type="stmt" count="0"/>
+      <line num="163" type="stmt" count="0"/>
+      <line num="166" type="stmt" count="0"/>
+      <line num="167" type="stmt" count="0"/>
+      <line num="168" type="stmt" count="0"/>
+      <line num="170" type="stmt" count="0"/>
+      <line num="171" type="stmt" count="0"/>
+      <line num="172" type="stmt" count="0"/>
+      <line num="174" type="stmt" count="0"/>
+      <line num="175" type="stmt" count="0"/>
+      <line num="176" type="stmt" count="0"/>
+      <line num="177" type="stmt" count="0"/>
+      <line num="178" type="stmt" count="0"/>
+      <line num="179" type="stmt" count="1"/>
+      <line num="190" type="method" count="4"/>
+      <line num="192" type="stmt" count="4"/>
+      <metrics loc="194" ncloc="97" executablelines="52" executedlines="18" classes="1" methods="3" coveredmethods="3" statements="55" coveredstatements="18" elements="58" coveredelements="21"/>
+    </file>
+    <metrics files="2" loc="290" ncloc="120" executablelines="57" executedlines="19" classes="2" methods="6" coveredmethods="4" statements="63" coveredstatements="19" elements="69" coveredelements="23"/>
+  </project>
+</coverage>

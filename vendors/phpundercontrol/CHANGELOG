@@ -1,0 +1,160 @@
+phpUnderControl 0.6.1
+---------------------
+
+- New setup command, which creates an unix init script for your phpUnderControl
+  installation. All features were supplied by proofek.
+
+phpUnderControl 0.6.0
+---------------------
+
+- Several new features like changesets, separate tab for PHPCPD and new
+  charts for build revisions + code clones. All features supplied by
+  hpbuniat via github.
+- Implemented #665: Display limit for build metrics.
+- Fixed #771: Invalid character in CodeSniffer output.
+- Fixed #732: Show revision of SVN/CVS on dashboard. Patch supplied by
+  hpbuniat, through phpunit's issue tracker.
+- Fixed #1003: Force build button in the /cruisecontrol app doesn't work.
+- Fixed #1044: callServer should return false. Patch supplied by
+  Mekras in phpunit's issue tracker.
+
+phpUnderControl 0.5.1
+---------------------
+
+- Now phpUnderControl should work with CruiseControl 2.8.3. Thanks to 
+  Mike van Riel who provided some hints on this issue in a blog comment.
+- Fixed #983: Graph unitests throw fatal error when ezComponents not
+  available. Thanks to Sebastian Marek for this contribution.
+- Fixed #966: phpcs-details.xsl not showing file name.
+- Closed #863: Destination option is now deprecated.
+- Fixed #862: Command line switches without parameter don't work. Thanks
+  to Sebastian Marek for this contribution.
+- Fixed #861: Password is used as username in check outs. This patch was
+  supplied by Thorsten Daners via e-mail.
+- Fixed #734: Now the build dropdown redirects to the correct build uri.
+- Implemented #703: PHPUnit test results are now the first entry on the
+  project.
+- Fixed #700: Throw an exception when the specified project does not exist.
+  overview page.
+- Implemented #675: Use "php -l" for lint checking and not PHPUnit. Thanks
+  to Sebastian Marek for this contribution.
+- Implemented #625: Integrate PHP_Depend results. Thanks to Sebastian Marek
+  for this contribution.
+
+phpUnderControl 0.5.0
+---------------------
+
+- Merger for PHPUnit log files
+- PHP_CodeBrowser integrated.
+
+phpUnderControl 0.4.4
+---------------------
+
+- PHP 5.2.5 only bug fixed.
+- Odd/even issue for nested testsuites fixed.
+- Additional runtime exceptions for phpUnderControl cli tools added.
+- Now the merge cli tool throws an exception to signal errors to cruisecontrol.
+
+phpUnderControl 0.4.3
+---------------------
+
+- Broken element identifier for failure message DIVs fixed. (#477)
+
+phpUnderControl 0.4.2
+---------------------
+
+- Hide empty CodeSniffer results on the project overview page.
+
+phpUnderControl 0.4.1
+---------------------
+
+- New compact project overview page that doesn't show all CodeSniffer, PMD and
+  PHPDoc errors and warnings. Suggested by Sebastian, kore, norro.
+- Improved navigation for the CodeSniffer view.
+- PHPDoc errors integrated into generated documentation.
+- Better visualization for @dataProvider tests.
+- Improved PHPUnit view.
+
+phpUnderControl 0.4.0
+---------------------
+
+- Checkouts for subversion and cvs added.
+- Switch to the new pluggable cli system.
+- Project command/wizard implemented.  
+- Height of embedded iframes optimized.
+- New dashboard project is building throbber and force project build button 
+  added. Thanks to kore.
+- New dashboard project is building throbber and force project build button 
+  added. Thanks to kore.
+- Two new cli commands implemented. 1. Project-delete to delete a complete 
+  project with all the generated contents. 2) Project-clean to remove a defined
+  number of old builds.
+- Minor UI improvements.
+
+phpUnderControl 0.3.6
+---------------------
+
+- Dashboard bugfix. The projects weren't sorted on the dashboard page. Thanks to
+  kore who notices this behaviour.
+- Code cleanup for OS detection and fix for MacOSX Darwin added. Thanks to 
+  Sebastian who provides a patch.
+- Customization support for java server pages added. This new feature allows 
+  custom tabs for further artifacts and build results. 
+- New chart type for the unit test execution time added.
+
+phpUnderControl 0.3.5
+---------------------
+
+- New dashboard like index page, thanks to kore.
+- phpUnderControl favicon added, thanks to kore.
+- Custom PhpDocumentor template based on HTML:Smarty:HandS added.
+- Build breakdown timeline colors fixed. When the first build was broken the
+  color green was choosen for broken builds. 
+- Directory structure refactored. Data related stuff is now in a single 
+  directory.
+- New error, success, fail, skipped icons by kore.
+
+phpUnderControl 0.3.4
+---------------------
+
+- In 0.3.3 the class phpucDotChartOptions was missing.
+
+phpUnderControl 0.3.1
+---------------------
+
+- Bugfix for different artifact locations.
+
+phpUnderControl 0.3.0
+---------------------
+
+Core
+- New console input class added.
+- New dynamic command/option layer for console started. 
+- New ezcGraph based metrics view integrated.
+- Changed from static to dynamic autoloading. 
+
+phpUnderControl 0.2.2
+---------------------
+
+Core
+- Default body background color set.
+- Documented example for the CruiseControl config.xml file and an ant build.xml
+  file for the phpUnderControl project added.
+
+phpUnderControl 0.2.1
+---------------------
+
+Core
+- Three new metric views added. Thanks to Sebastian for this great idea.
+   1) Unit Tests vs. Number of Failing Unit Tests.
+   2) Executable Lines of Code vs. Code Coverage in Percent.
+   3) Classes/Methods vs. Number of Tested Classes/Methods 
+- Dependency to latest PHP_CodeSniffer version 1.0.0RC3 increased.
+- CruiseControl config.xml file abstration implemented.
+- Source refactored to make the command line stuff testable.
+- Many code cleanups and documentation fixes.
+
+Tests
+- Test cases for the cli tool added.
+- Test cases for the build file abstraction added.
+- Test cases for some tasks added.
