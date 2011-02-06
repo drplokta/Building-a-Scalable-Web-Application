@@ -19,6 +19,6 @@ class ssh {
     exec { "allow-openssh":
         command => "/usr/sbin/ufw allow OpenSSH",
         unless => "/usr/sbin/ufw status | grep \"OpenSSH.*ALLOW.*Anywhere\\|Status: inactive\"",
-        require => Exec["enable-firewall"]]
+        require => Exec["enable-firewall"],
     }
 }

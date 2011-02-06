@@ -19,6 +19,6 @@ class nginx {
     exec { "allow-http":
         command => "/usr/sbin/ufw allow Apache Full",
         unless => "/usr/sbin/ufw status | grep \"Apache\ Full.*ALLOW.*Anywhere\\|Status: inactive\"",
-        require => Exec["enable-firewall"]]
+        require => Exec["enable-firewall"],
     }
 }
