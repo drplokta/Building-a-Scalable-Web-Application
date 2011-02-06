@@ -35,4 +35,5 @@ class postgresqlserver {
 class dev {
     include puppet-dev
     include php5-dev
+    include mongodb::dev
 }
