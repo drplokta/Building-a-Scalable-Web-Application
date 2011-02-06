@@ -26,3 +26,7 @@ class webserver {
 class mongodbserver {
     include mongodb
 }
+
+class postgresqlserver {
+    include postgresql
+}
