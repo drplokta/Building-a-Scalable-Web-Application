@@ -22,7 +22,9 @@ class beanstalkd {
     }
     
     service { beanstalkd:
-        ensure => started,
+        ensure => running,
         subscribe => File["/etc/default/beanstalkd"],
+        hasstatus => true,
+        hasrestart -> true,
     }
 }
