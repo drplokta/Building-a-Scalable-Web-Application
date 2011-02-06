@@ -20,4 +20,9 @@ class beanstalkd {
         unless => "/usr/sbin/ufw status | grep \"beanstalkd.*ALLOW.*Anywhere\\|Status: inactive\"",
         require => Exec["enable-firewall"],
     }
+    
+    service { beanstalkd:
+        ensure => started,
+        subscribe => File["/etc/default/beanstalkd"],
+    }
 }
