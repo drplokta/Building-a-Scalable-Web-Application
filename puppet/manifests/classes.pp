@@ -30,3 +30,7 @@ class mongodbserver {
 class postgresqlserver {
     include postgresql
 }
+
+class dev {
+    include puppet-dev
+}

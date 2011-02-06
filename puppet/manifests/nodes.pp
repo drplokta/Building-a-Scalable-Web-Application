@@ -4,6 +4,7 @@ node 	"dev1.localdomain" {
     include webserver
     include mongodbserver
     include postgresqlserver
+    include dev
 }
 
 
