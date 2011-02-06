@@ -23,6 +23,7 @@ class webserver {
     include nginx
     include spawn-fcgi
     include php5
+    include beanstalkd
 }
 
 class mongodbserver {
