@@ -6,7 +6,7 @@ class beanstalkd {
     file { "/etc/default/beanstalkd":
         source => "puppet:///modules/beanstalkd/beanstalkd",
         owner => root,
-        source => root,
+        group => root,
     }
     
     file { "/etc/ufw/applications.d/beanstalkd":
