@@ -1,0 +1,116 @@
+Cachen von Daten
+================
+
+Beim Datencaching weden PHP-Variablen im Cache gespeichert bzw. von dort ausgelesen.
+Die wichtigsten beiden Methoden dafür sind in der Basisklasse [CCache]
+definiert: [set()|CCache::set] und [get()|CCache::get].
+
+Eine Variable kann unter einer eindeutigen ID mit [set()|CCache::set] im Cache
+gespeichert werden:
+
+~~~
+[php]
+Yii::app()->cache->set($id, $value);
+~~~
+
+Die gecachten Daten verbleiben für immer im Cache, außer sie werden aufgrund
+bestimmter Cacherichtlinien entfernt (z.B. wenn der Cachespeicher voll ist und
+alte Daten daher entfernt werden). Über einen weiteren Parameter kann dieses
+Verhalten geändert werden, so dass die Daten nach einer bestimmten Zeitspanne
+verfallen:
+
+~~~
+[php]
+// Daten für max. 30 Sekunden um Cache halten
+Yii::app()->cache->set($id, $value, 30);
+~~~
+
+Mit [get()|CCache:get] kann man später (im gleichen oder einem späteren
+Request) über die ID die Daten wieder aus dem Cache auslesen. Wird hier
+`false` zurückgegeben, ist der Wert nicht im Cache verfügbar. Evtl. sollte man
+ihn dann neu anlegen:
+
+~~~
+[php]
+$value=Yii::app()->cache->get($id);
+if($value===false)
+{
+	// $value neu generieren und für spätere Zwecke im Cache 
+	// speichern, da der Wert nicht im Cache gefunden wurde
+	// Yii::app()->cache->set($id,$value);
+}
+~~~
+
+Es ist zu beachten, dass jede gespeicherte Variable eine eindeutige ID erhält. 
+Allerdings muss diese ID NICHT zwischen verschiedenen Anwendungen auf dem
+selben Server eindeutig sein. Die Cachekomponente kann die IDs
+unterschiedlicher Anwendungen unterscheiden.
+
+Einige Cachespeicher, wie MemCache oder APC, unterstützen die Abfrage mehrerer
+gespeicherter Werte auf einmal. Dadurch kann der Overhead beim Abrufen von
+gecachten Daten reduziert wreden. Seit Version 1.0.8 wird dieses Feature
+per [mget()|CCache::mget] unterstützt. Falls der zugrundeliegende
+Cachespeicher dieses Feature nicht unterstützt, wird es von
+[mget()|CCache::mget] simuliert.
+
+Mit [delete()|CCache::delete] wird ein einzelner Cacheeintrag gelöscht. Mit 
+[flush()|CCache::flush] kann der Cache komplett geleert werden. 
+Beim Aufruf von [flush()|CCache::flush] sollten Sie jedoch vorsichtig sein,
+da diesmal dabei auch alle gecachten Daten von anderen Anwendungen entfernt
+werden. 
+
+> Tip|Tipp: Da [CCache] das Interface `ArrayAccess` implementiert, kann eine
+> Cache-Komponente wie ein Array verwendet werden. Hier einige Beispiele:
+> ~~~
+> [php]
+> $cache=Yii::app()->cache;
+> $cache['var1']=$value1;  // äquivalent zu: $cache->set('var1',$value1);
+> $value2=$cache['var2'];  // äquivalent zu: $value2=$cache->get('var2');
+> ~~~
+
+Cachen mit Abhängigkeit
+-----------------------
+
+Außer über die Verfallszeit kann die Gültigkeit eines Cacheeintrags auch von
+anderen Bedingungen abhängig sein. Cacht  man zum Beispiel den Inhalt einer
+Datei, sollten die Cachedaten ungültig bzw. aktualisiert werden, sobald die
+Datei geändert wird.
+
+Eine solche Abhängigkeit (engl.: dependency) wird durch eine Instanz vom Typ 
+[CCacheDependency] oder deren Kindklasse repräsentiert. Beim Aufruf von 
+[set()|CCache::set] kann ein solches Objekt zusammen mit den zu cachenden
+Daten übergeben werden.
+
+~~~
+[php]
+// Der Wert verfällt in 30 Sekunden. Er kann auch schon eher verfallen
+// wenn die abhängige Datei verändert wird
+Yii::app()->cache->set($id, $value, 30, new CFileCacheDependency('DateiName'));
+~~~
+
+Wird `$value` mit [get()|CCache::get] ausgelesen, wird die Abhängigkeit
+ausgewertet.  Falls es dort eine Änderung gab, wird false
+zurückgeliefert. In diesem Fall müssen die Daten neu generiert werden.
+
+Folgende Cacheabhängigkeiten stehen bereit:
+
+   - [CFileCacheDependency]: Ändert sich bei einem neuen Änderungszeitpunkt
+   der Datei.
+
+   - [CDirectoryCacheDependency]: Ändert sich, wenn eine der Dateien im
+Verzeichnis (oder Unterverzeichnis davon) verändert wurde.
+
+   - [CDbCacheDependency]: Ändert sich, wenn das Ergebnis der SQL-Abfrage verändert.
+
+   - [CGlobalStateCacheDependency]: Ändert sich, wenn der Wert des angegebenen 
+globalen Status sich verändert hat. Ein globaler Status ist eine Variable, deren 
+Wert über mehrere Requests und Sessions hinweg beständig bleibt. Er wird über 
+[CApplication::setGlobalState()] gesetzt.
+
+   - [CChainedCacheDependency]: Ändert sich, wenn eine der Abhängigkeiten in
+der Kette eine Änderung anzeigt.
+
+   - [CExpressionDependency]: Ändert sich, wenn der Wert des angegebenen PHP-Ausdrucks sich ändert. Diese Klasse
+steht seit Version 1.0.4 zur Verfügung.
+
+<div class="revision">$Id: caching.data.txt 1855 2010-03-04 22:42:32Z qiang.xue $</div>
