@@ -9,7 +9,7 @@ class postgresql {
         group => root,
     }
 
-    exec { "allow-mongodb":
+    exec { "allow-postgreql":
         command => "/usr/sbin/ufw allow PostgreSQL",
         unless => "/usr/sbin/ufw status | grep \"PostgreSQL.*ALLOW.*Anywhere\\|Status: inactive\"",
         require => Exec["enable-firewall"],

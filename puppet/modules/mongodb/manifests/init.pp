@@ -10,7 +10,7 @@ class mongodb {
         group => root,
     }
 
-    exec { "allow-mongodb":
+    exec { "allow-mongodb-server":
         command => "/usr/sbin/ufw allow \"MongoDB Server\"",
         unless => "/usr/sbin/ufw status | grep \"MongoDB Server.*ALLOW.*Anywhere\\|Status: inactive\"",
         require => Exec["enable-firewall"],
