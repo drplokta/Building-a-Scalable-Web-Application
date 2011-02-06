@@ -9,6 +9,12 @@ class standard {
 	include users::admin
 	include vim
     include exim4
+    
+    # Add mongodb.org apt key
+    apt::key { "7F0CEB10":
+        keyid => 7F0CEB10,
+        ensure => present,
+    }
 }
 
 class webserver {
