@@ -22,3 +22,7 @@ class webserver {
     include spawn-fcgi
     include php5
 }
+
+class mongodbserver {
+    include mongodb
+}
