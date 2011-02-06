@@ -25,6 +25,6 @@ class beanstalkd {
         ensure => running,
         subscribe => File["/etc/default/beanstalkd"],
         hasstatus => true,
-        hasrestart -> true,
+        hasrestart => true,
     }
 }
