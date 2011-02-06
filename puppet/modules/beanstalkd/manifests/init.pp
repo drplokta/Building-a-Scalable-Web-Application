@@ -15,7 +15,7 @@ class beanstalkd {
         group => root,
     }
 
-    exec { "allow-http":
+    exec { "allow-beanstalkd":
         command => "/usr/sbin/ufw allow beanstalkd",
         unless => "/usr/sbin/ufw status | grep \"beanstalkd.*ALLOW.*Anywhere\\|Status: inactive\"",
         require => Exec["enable-firewall"],
