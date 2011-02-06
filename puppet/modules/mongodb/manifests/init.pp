@@ -29,3 +29,4 @@ class mongodb::dev {
         unless => "/usr/sbin/ufw status | grep \"MongoDB Stats.*ALLOW.*Anywhere\\|Status: inactive\"",
         require => Exec["enable-firewall"],
     }
+}
