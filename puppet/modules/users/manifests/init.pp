@@ -29,7 +29,7 @@ define useraccount ( $ensure = present, $uid, $pgroup = users,
         ensure  => directory,
         owner   => $home_owner,
         group   => $home_group,
-        mode    => 750,
+        mode    => 755,
         require => User["${username}"],
     }
     file { "${homefs}/${username}/.ssh":

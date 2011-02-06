@@ -24,6 +24,7 @@ class webserver {
     include spawn-fcgi
     include php5
     include beanstalkd
+    include memcached
 }
 
 class mongodbserver {
