@@ -15,5 +15,10 @@ class ssh {
         ensure => running,
         subscribe => File["/etc/ssh/sshd_config"],
     }
+    
+    exec { "allow-openssh":
+        command => "/usr/sbin/ufw allow OpenSSH",
+        unless => "/usr/sbin/ufw status | grep \"OpenSSH.*ALLOW.*Anywhere\\|Status: inactive\"",
+        require => Exec["enable-firewall"]]
+    }
 }
-
