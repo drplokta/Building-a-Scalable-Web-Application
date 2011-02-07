@@ -37,9 +37,7 @@ class apt {
     
     exec { "apt-get update":
         path        => ["/usr/bin"],
-        subscribe 	=> [File["/etc/apt/sources.list"],Apt::Key["7F0CEB10"]],
+        subscribe 	=> File["/etc/apt/sources.list"],
         refreshonly => true,
     }
 }
-
-class { apt: stage => pre }
