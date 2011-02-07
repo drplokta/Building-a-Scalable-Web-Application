@@ -27,5 +27,6 @@ class beanstalkd {
         subscribe => File["/etc/default/beanstalkd"],
         hasstatus => true,
         hasrestart => true,
+        require => Package["beanstalkd"],
     }
 }
