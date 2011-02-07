@@ -2,6 +2,7 @@ class mongodb {
     package { mongodb-stable:
         ensure => installed,
         require => Apt::Key["7F0CEB10"],
+        require => File["/etc/apt/sources.list"],
     }
     
     file { "/etc/ufw/applications.d/mongodb-server":
