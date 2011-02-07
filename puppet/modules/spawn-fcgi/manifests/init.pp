@@ -21,6 +21,6 @@ class spawn-fcgi {
         hasstatus  => true,
 		hasrestart => true,
         subscribe  => File["/etc/default/php-fastcgi"],
-		require    => Package["php-fastcgi"].
+		require    => Package["php-fastcgi"],
     }
 }
