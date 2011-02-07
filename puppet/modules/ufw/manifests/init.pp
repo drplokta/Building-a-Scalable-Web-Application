@@ -9,7 +9,7 @@ class ufw {
       require => [Package["ufw"]],
     }
     
-    service { ufw{
+    service { ufw:
         require => Package["ufw"],
         hasrestart => true,
         hasstatus => true,
