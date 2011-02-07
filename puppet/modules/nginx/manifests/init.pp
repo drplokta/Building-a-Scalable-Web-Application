@@ -1,10 +1,13 @@
 class nginx {
     package { "nginx":
         ensure  => installed,
-		require => Package["apache2-mpm-prefork"],
+		require => Package["apache2"],
     }
     
-    package { "apache2-mpm-prefork":
+    package { "apache2":
+		name   => [
+			"apache2-mpm-prefork", "apache2.2-bin", "apache2.2-common",
+			"apache2-utils", "apache2-mpm-itk"],
         ensure => absent,
     }
 
