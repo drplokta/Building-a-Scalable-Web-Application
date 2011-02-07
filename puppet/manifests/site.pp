@@ -1,6 +1,4 @@
-stage { "pre": }
-
-Stage["pre"] -> Stage["main"]
+stage { pre: before => Stage[main] }
 
 $rootdir = "/root/Building-a-Scalable-Web-Application"
 

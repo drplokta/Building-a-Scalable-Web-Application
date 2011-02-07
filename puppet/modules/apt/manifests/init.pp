@@ -27,7 +27,7 @@ define apt::key($keyid, $ensure, $keyserver = "keyserver.ubuntu.com") {
     }
 }
 
-class { apt: stage => pre } {
+class apt {
     #Set sources for apt
     file { "/etc/apt/sources.list":
         source => "puppet:///modules/apt/sources.list",
@@ -42,3 +42,4 @@ class { apt: stage => pre } {
     }
 }
 
+class { apt: stage => pre }
