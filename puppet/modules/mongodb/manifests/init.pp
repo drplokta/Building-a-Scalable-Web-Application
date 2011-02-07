@@ -1,9 +1,4 @@
 class mongodb {
-    apt::key { "7F0CEB10":
-        keyid  => "7F0CEB10",
-        ensure => present,
-    }
-
     package { "mongodb-stable":
         ensure  => installed,
     }
