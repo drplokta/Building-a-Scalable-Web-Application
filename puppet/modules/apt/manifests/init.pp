@@ -39,5 +39,6 @@ class apt {
         path        => ["/usr/bin"],
         subscribe 	=> File["/etc/apt/sources.list"],
         refreshonly => true,
+        require 	=> Apt::Key["7F0CEB10"],
     }
 }
