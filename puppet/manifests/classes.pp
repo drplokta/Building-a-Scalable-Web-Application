@@ -41,7 +41,7 @@ class dev {
     include mongodb::dev
 }
 
-class integrationserver
+class integrationserver {
     include cruisecontrol
     include java
 }
