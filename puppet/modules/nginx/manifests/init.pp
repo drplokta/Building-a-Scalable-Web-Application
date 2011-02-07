@@ -8,9 +8,10 @@ class nginx {
     }
 
     file { "/etc/nginx/sites-available/default":
-        source => "puppet:///modules/nginx/default",
-        owner  => "root",
-        group  => "root",
+        source  => "puppet:///modules/nginx/default",
+        owner   => "root",
+        group   => "root",
+		require => Package["nginx"],
     }
 
     service { "nginx":
