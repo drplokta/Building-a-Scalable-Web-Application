@@ -34,5 +34,10 @@ class apt {
         owner => root,
         group => root,
     }
+    
+    exec { "apt-get update":
+        path=> ["/usr/bin"],
+        subscribe => File["/etc/apt/sources.list"],
+    }
 }
 
