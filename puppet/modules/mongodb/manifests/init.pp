@@ -14,7 +14,7 @@ class mongodb {
     exec { "allow-mongodb-server":
         command => "/usr/sbin/ufw allow \"MongoDB Server\"",
         unless => "/usr/sbin/ufw status | grep \"MongoDB Server.*ALLOW.*Anywhere\\|Status: inactive\"",
-        require => [Exec["enable-firewall"], [File["/etc/ufw/applications.d/mongodb-server"]],
+        require => [Exec["enable-firewall"], File["/etc/ufw/applications.d/mongodb-server"]],
     }
 }
 
@@ -29,6 +29,6 @@ class mongodb::dev {
     exec { "allow-mongodb-stats":
         command => "/usr/sbin/ufw allow \"MongoDB Stats\"",
         unless => "/usr/sbin/ufw status | grep \"MongoDB Stats.*ALLOW.*Anywhere\\|Status: inactive\"",
-        require => [Exec["enable-firewall"], [File["/etc/ufw/applications.d/mongodb-stats"]],
+        require => [Exec["enable-firewall"], File["/etc/ufw/applications.d/mongodb-stats"]],
     }
 }
