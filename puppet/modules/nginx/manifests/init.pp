@@ -1,10 +1,11 @@
 class nginx {
     package { "nginx":
-        ensure => installed,
+        ensure  => installed,
+		require => Package["apache2-mpm-prefork"],
     }
     
     package { "apache2-mpm-prefork":
-        ensure => purged,
+        ensure => absent,
     }
 
     file { "/etc/nginx/sites-available/default":
