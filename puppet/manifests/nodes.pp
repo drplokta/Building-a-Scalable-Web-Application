@@ -7,4 +7,10 @@ node 	"dev1.localdomain" {
     include dev
 }
 
-
+node "int1.localdomain" {
+    include standard
+    include integrationserver
+    include mongodbserver
+    include webserver
+    include postgresqlserver
+}

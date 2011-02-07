@@ -40,3 +40,8 @@ class dev {
     include php5-dev
     include mongodb::dev
 }
+
+class integrationserver
+    include cruisecontrol
+    include java
+}
