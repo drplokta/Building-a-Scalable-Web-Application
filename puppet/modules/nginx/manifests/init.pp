@@ -20,6 +20,7 @@ class nginx {
         source => "puppet:///modules/ufw/nginx-server",
         owner => root,
         group => root,
+        notify => Service["ufw"],
     }
 
     exec { "allow-http":

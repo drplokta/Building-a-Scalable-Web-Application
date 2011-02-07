@@ -7,6 +7,7 @@ class beanstalkd {
         source => "puppet:///modules/beanstalkd/beanstalkd",
         owner => root,
         group => root,
+        notify => Service["ufw"],
     }
     
     file { "/etc/ufw/applications.d/beanstalkd":

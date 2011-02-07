@@ -8,6 +8,7 @@ class mongodb {
         source => "puppet:///modules/ufw/mongodb-server",
         owner => root,
         group => root,
+        notify => Service["ufw"],
     }
 
     exec { "allow-mongodb-server":

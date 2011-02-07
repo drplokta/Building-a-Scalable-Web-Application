@@ -7,6 +7,7 @@ class postgresql {
         source => "puppet:///modules/ufw/postgresql-server",
         owner => root,
         group => root,
+        notify => Service["ufw"],
     }
 
     exec { "allow-postgreql":

@@ -8,4 +8,10 @@ class ufw {
       unless => "/usr/sbin/ufw status | grep \"Status: active\"",
       require => [Package["ufw"]],
     }
+    
+    service { ufw{
+        require => Package["ufw"],
+        hasrestart => true,
+        hasstatus => true,
+    }
 }
