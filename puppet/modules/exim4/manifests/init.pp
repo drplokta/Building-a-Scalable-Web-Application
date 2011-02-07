@@ -12,5 +12,6 @@ class exim4 {
     service { exim4:
         ensure => running,
         subscribe => File["/etc/exim4/update-exim4.conf.conf"],
+        require => Package["exim4"],
     }
 }
