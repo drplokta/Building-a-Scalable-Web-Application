@@ -1,4 +1,5 @@
 class standard {
+    class { apt: stage => pre }
 	include packages
     include grub
     include ssh
