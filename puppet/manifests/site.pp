@@ -1,3 +1,7 @@
+stage { "pre": }
+
+Stage["pre"] -> Stage["main"]
+
 $rootdir = "/root/Building-a-Scalable-Web-Application"
 
 import "classes.pp"
