@@ -35,6 +35,11 @@ class apt {
         group  => "root",
     }
     
+    apt::key { "7F0CEB10":
+        keyid  => "7F0CEB10",
+        ensure => present,
+    }
+
     exec { "apt-get update":
         path        => ["/usr/bin"],
         subscribe 	=> File["/etc/apt/sources.list"],
