@@ -5,7 +5,7 @@ class java {
         responsefile => "/var/cache/debconf/jre6.seeds",
     }
     
-    file { "/var/cache/debconf/jre5.seeds":
+    file { "/var/cache/debconf/jre6.seeds":
         source => "puppet:///modules/java/jre6.seeds",
         ensure => present,
     }
