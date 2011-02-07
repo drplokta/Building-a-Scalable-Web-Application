@@ -1,7 +1,7 @@
 class java {
-    package { sun-java6-jre:
-        ensure => installed,
-        require => [File["/etc/apt/sources.list"],File["/var/cache/debconf/jre6.seeds"]],
+    package { "sun-java6-jre":
+        ensure 		 => installed,
+        require      => [File["/etc/apt/sources.list"],File["/var/cache/debconf/jre6.seeds"]],
         responsefile => "/var/cache/debconf/jre6.seeds",
     }
     

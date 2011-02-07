@@ -5,14 +5,14 @@ class postgresql {
     
     file { "/etc/ufw/applications.d/postgresql-server":
         source => "puppet:///modules/ufw/postgresql-server",
-        owner => root,
-        group => root,
+        owner  => "root",
+        group  => "root",
         notify => Service["ufw"],
     }
 
     exec { "allow-postgreql":
         command => "/usr/sbin/ufw allow PostgreSQL",
-        unless => "/usr/sbin/ufw status | grep \"PostgreSQL.*ALLOW.*Anywhere\\|Status: inactive\"",
+        unless  => "/usr/sbin/ufw status | grep \"PostgreSQL.*ALLOW.*Anywhere\\|Status: inactive\"",
         require => [Exec["enable-firewall"], File["/etc/ufw/applications.d/postgresql-server"]],
     }
     

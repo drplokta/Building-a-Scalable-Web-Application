@@ -13,12 +13,12 @@ define apt::key($keyid, $ensure, $keyserver = "keyserver.ubuntu.com") {
         }
         absent:  {
             exec { "Remove $keyid from apt keystore":
-                path    => "/bin:/usr/bin",
+                path        => "/bin:/usr/bin",
                 environment => "HOME=/root",
-                command => "apt-key del $keyid",
-                user    => "root",
-                group   => "root",
-                onlyif  => "apt-key list | grep $keyid",
+                command     => "apt-key del $keyid",
+                user        => "root",
+                group   	=> "root",
+                onlyif  	=> "apt-key list | grep $keyid",
             }
         }
         default: {
@@ -31,13 +31,13 @@ class apt {
     #Set sources for apt
     file { "/etc/apt/sources.list":
         source => "puppet:///modules/apt/sources.list",
-        owner => root,
-        group => root,
+        owner  => "root",
+        group  => "root",
     }
     
     exec { "apt-get update":
-        path=> ["/usr/bin"],
-        subscribe => [File["/etc/apt/sources.list"],Apt::Key["7F0CEB10"]],
+        path        => ["/usr/bin"],
+        subscribe 	=> [File["/etc/apt/sources.list"],Apt::Key["7F0CEB10"]],
         refreshonly => true,
     }
 }

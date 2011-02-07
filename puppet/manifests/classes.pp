@@ -11,12 +11,6 @@ class standard {
     include exim4
     include ufw
     include git
-    
-    # Add mongodb.org apt key
-    apt::key { "7F0CEB10":
-        keyid => 7F0CEB10,
-        ensure => present,
-    }
 }
 
 class webserver {
