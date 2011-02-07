@@ -2,6 +2,10 @@ class nginx {
     package { nginx:
         ensure => installed,
     }
+    
+    package { apache2-mpm-prefork:
+        ensure => purged,
+    }
 
     file { "/etc/nginx/sites-available/default":
         source => "puppet:///modules/nginx/default",
