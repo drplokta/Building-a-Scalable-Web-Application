@@ -26,6 +26,6 @@ class nginx {
     exec { "allow-http":
         command => "/usr/sbin/ufw allow nginx",
         unless => "/usr/sbin/ufw status | grep \"nginx.*ALLOW.*Anywhere\\|Status: inactive\"",
-        require => Exec["enable-firewall"],
+        require => [Exec["enable-firewall"], [File["/etc/ufw/applications.d/nginx-server"]],
     }
 }
