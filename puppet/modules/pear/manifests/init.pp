@@ -1,5 +1,6 @@
 class pear {
-    pear { phpunit:
-        ensure => installed,
+    package { phpunit:
+        ensure   => latest,
+        provider => pear,
     }
 }
