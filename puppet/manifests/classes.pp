@@ -39,4 +39,5 @@ class dev {
 class integrationserver {
     include cruisecontrol
     include java
+    include pear
 }
