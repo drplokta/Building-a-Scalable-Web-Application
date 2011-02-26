@@ -9,7 +9,7 @@ deb-src http://security.debian.org/ squeeze/updates main contrib non-free
 deb     http://mirrors.kernel.org/debian squeeze-updates main contrib non-free
 deb-src http://mirrors.kernel.org/debian squeeze-updates main contrib non-free
 
-deb     http://mirrors.kernel.org/debian squeeze-backports main contrib non-free
-deb-src http://mirrors.kernel.org/debian squeeze-backports main contrib non-free
+deb     http://backports.debian.org/debian-backports squeeze-backports main contrib non-free
+deb-src http://backports.debian.org/debian-backports squeeze-backports main contrib non-free
 
 deb http://downloads.mongodb.org/distros/debian 5.0 10gen
