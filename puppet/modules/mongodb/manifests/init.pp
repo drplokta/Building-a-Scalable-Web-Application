@@ -16,10 +16,10 @@ class mongodb {
         unless  => "/usr/sbin/ufw status | grep \"MongoDB Server.*ALLOW.*Anywhere\\|Status: inactive\"",
         require => [Exec["enable-firewall"], File["/etc/ufw/applications.d/mongodb-server"]],
     }
-}
 
-file { "/etc/sources.list.d/apt.mongodb":
-    source => "puppet:///modules/mongodb/apt.mongodb",
+	file { "/etc/sources.list.d/apt.mongodb":
+	    source => "puppet:///modules/mongodb/apt.mongodb",
+	}
 }
 
 class mongodb::dev {
