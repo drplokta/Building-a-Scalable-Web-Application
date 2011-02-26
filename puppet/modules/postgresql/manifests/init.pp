@@ -1,13 +1,16 @@
 class postgresql {
     package { ["postgresql-9.0", "postgresql-client-9.0"]:
-        ensure => installed,
+        ensure  => installed,
+		require => File["/etc/apt-preferences.d/apt.postrgresql"],
     }
     
     file { "/etc/ufw/applications.d/postgresql-server":
         source => "puppet:///modules/ufw/postgresql-server",
-        owner  => "root",
-        group  => "root",
         notify => Service["ufw"],
+    }
+
+    file { "/etc/apt-preferences.d/apt.postrgresql":
+        source => "puppet:///modules/postgresql/apt.postgresql",
     }
 
     exec { "allow-postgresql":
