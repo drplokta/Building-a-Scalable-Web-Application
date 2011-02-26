@@ -18,7 +18,7 @@ class mongodb {
     }
 
 	file { "/etc/sources.list.d/apt.mongodb":
-	    source => "puppet:///modules/mongodb/files/apt.mongodb",
+    	source  => "puppet:///modules/nginx/default",
 	}
 }
 
