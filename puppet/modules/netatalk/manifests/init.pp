@@ -1,4 +1,4 @@
-class postgresql {
+class netatalk {
     package { netatalk:
         ensure => installed,
     }
