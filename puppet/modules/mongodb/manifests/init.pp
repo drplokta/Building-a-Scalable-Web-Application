@@ -1,7 +1,7 @@
 class mongodb {
     package { "mongodb-stable":
         ensure  => installed,
-		require => File["/etc/sources.list.d/apt.mongodb"],		
+		require => File["/etc/apt/sources.list.d/apt.mongodb"],		
     }
     
     file { "/etc/ufw/applications.d/mongodb-server":
@@ -17,8 +17,8 @@ class mongodb {
         require => [Exec["enable-firewall"], File["/etc/ufw/applications.d/mongodb-server"]],
     }
 
-	file { "/etc/sources.list.d/apt.mongodb":
-    	source  => "puppet:///modules/nginx/default",
+	file { "/etc/apt/sources.list.d/apt.mongodb":
+    	source  => "puppet:///modules/mongodb/apt.mongodb",
 	}
 }
 
