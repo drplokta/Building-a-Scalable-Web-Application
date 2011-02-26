@@ -10,7 +10,7 @@ class postgresql {
     }
 
     file { "/etc/preferences.d/apt.postgresql":
-        source => "puppet:///modules/postgresql/apt.postgresql",
+        source => "puppet:///modules/postgresql/files/apt.postgresql",
     }
 
     exec { "allow-postgresql":
