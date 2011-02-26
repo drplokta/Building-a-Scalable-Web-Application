@@ -3,7 +3,7 @@ class netatalk {
         ensure => installed,
     }
     
-    file { "/etc/ufw/applications.d/postgresql-server":
+    file { "/etc/ufw/applications.d/netatalk":
         source => "puppet:///modules/ufw/netatalk",
         owner  => "root",
         group  => "root",
