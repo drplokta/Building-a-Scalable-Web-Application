@@ -17,6 +17,10 @@ class mongodb {
     }
 }
 
+file { "/etc/sources.list.d/apt.mongodb":
+    source => "puppet:///modules/mongodb/apt.mongodb",
+}
+
 class mongodb::dev {
     file { "/etc/ufw/applications.d/mongodb-stats":
         source => "puppet:///modules/ufw/mongodb-stats",

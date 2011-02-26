@@ -9,7 +9,7 @@ class postgresql {
         notify => Service["ufw"],
     }
 
-    file { "/etc/apt-preferences.d/apt.postrgresql":
+    file { "/etc/preferences.d/apt.postrgresql":
         source => "puppet:///modules/postgresql/apt.postgresql",
     }
 
