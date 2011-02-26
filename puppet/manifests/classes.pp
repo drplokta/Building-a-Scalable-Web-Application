@@ -34,6 +34,7 @@ class dev {
     include puppet-dev
     include php5-dev
     include mongodb::dev
+	include netatalk
 }
 
 class integrationserver {

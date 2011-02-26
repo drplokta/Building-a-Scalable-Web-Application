@@ -1,5 +1,5 @@
 class postgresql {
-    package { ["postgresql-8.4", "postgresql-client"]:
+    package { ["postgresql-9.0", "postgresql-client-9.0"]:
         ensure => installed,
     }
     
@@ -10,7 +10,7 @@ class postgresql {
         notify => Service["ufw"],
     }
 
-    exec { "allow-postgreql":
+    exec { "allow-postgresql":
         command => "/usr/sbin/ufw allow PostgreSQL",
         unless  => "/usr/sbin/ufw status | grep \"PostgreSQL.*ALLOW.*Anywhere\\|Status: inactive\"",
         require => [Exec["enable-firewall"], File["/etc/ufw/applications.d/postgresql-server"]],
