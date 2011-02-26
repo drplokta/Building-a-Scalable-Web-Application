@@ -45,7 +45,7 @@ class users {
         	group   => $home_group,
         	mode    => "600",
         	require => File["${homefs}/${username}/.ssh"],
-        	source  => "puppet:///modules/users/${username}/.ssh/authorized_keys",
+        	source  => "puppet:///modules/users/${username}/ssh/authorized_keys",
     	}
 	}
 }
