@@ -35,14 +35,23 @@ class apt {
         group  => "root",
     }
     
+	#Apt key for MongoDB
     apt::key { "7F0CEB10":
         keyid  => "7F0CEB10",
         ensure => present,
+		notify => Exec["apt-get update"], 
+    }
+
+	#Apt key for Jenkins
+    apt::key { "D50582E6":
+        keyid  => "D50582E6",
+        ensure => present,
+		notify => Exec["apt-get update"], 
     }
 
     exec { "apt-get update":
         path        => ["/usr/bin"],
-        subscribe 	=> [File["/etc/apt/sources.list"],Apt::Key["7F0CEB10"]],
+        subscribe 	=> File["/etc/apt/sources.list"],
         refreshonly => true,
     }
 }

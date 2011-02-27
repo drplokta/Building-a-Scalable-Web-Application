@@ -5,10 +5,10 @@ class mongodb {
     }
     
     file { "/etc/ufw/applications.d/mongodb-server":
-        source => "puppet:///modules/ufw/mongodb-server",
-        owner  => "root",
-        group  => "root",
-        notify => Service["ufw"],
+        source  => "puppet:///modules/ufw/mongodb-server",
+		require => Package["ufw"],
+        owner   => "root",
+        group   => "root",
     }
 
     exec { "allow-mongodb-server":
@@ -19,15 +19,18 @@ class mongodb {
 
 	file { "/etc/apt/sources.list.d/mongodb.list":
     	source  => "puppet:///modules/mongodb/mongodb.list",
+        owner   => "root",
+        group   => "root",
+		notify  => Exec["apt-get update"], 
 	}
 }
 
 class mongodb::dev {
     file { "/etc/ufw/applications.d/mongodb-stats":
-        source => "puppet:///modules/ufw/mongodb-stats",
-        owner  => "root",
-        group  => "root",
-        notify => Service["ufw"],
+        source  => "puppet:///modules/ufw/mongodb-stats",
+		require => Package["ufw"],
+        owner   => "root",
+        group   => "root",
     }
 
     exec { "allow-mongodb-stats":

@@ -6,11 +6,15 @@ class postgresql {
     
     file { "/etc/ufw/applications.d/postgresql-server":
         source => "puppet:///modules/ufw/postgresql-server",
-        notify => Service["ufw"],
+		require => Package["ufw"],
+        owner  => "root",
+        group  => "root",
     }
 
     file { "/etc/apt/preferences.d/postgresql.pref":
         source => "puppet:///modules/postgresql/postgresql.pref",
+        owner  => "root",
+        group  => "root",
     }
 
     exec { "allow-postgresql":

@@ -5,9 +5,9 @@ class netatalk {
     
     file { "/etc/ufw/applications.d/netatalk":
         source => "puppet:///modules/ufw/netatalk",
+		require => Package["ufw"],
         owner  => "root",
         group  => "root",
-        notify => Service["ufw"],
     }
 
     exec { "allow-netatalk":

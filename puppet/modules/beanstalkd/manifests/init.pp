@@ -11,7 +11,8 @@ class beanstalkd {
     }
     
     file { "/etc/ufw/applications.d/beanstalkd":
-        source => "puppet:///modules/ufw/beanstalkd",
+        source  => "puppet:///modules/ufw/beanstalkd",
+		require => Package["ufw"],
         owner  => "root",
         group  => "root",
     }

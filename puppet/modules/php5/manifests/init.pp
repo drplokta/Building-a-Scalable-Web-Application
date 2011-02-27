@@ -16,3 +16,11 @@ class php5 {
         notify   => Service["php-fastcgi"],        
     }
 }
+
+class php5::dev {
+	class php5-dev {
+	    package { "php5-dev":
+	        ensure => installed,
+	    }
+	}
+}

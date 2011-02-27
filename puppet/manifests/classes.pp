@@ -1,5 +1,5 @@
 class standard {
-    class { apt: stage => pre }
+	include apt
 	include packages
     include grub
     include ssh
@@ -32,12 +32,13 @@ class postgresqlserver {
 
 class dev {
     include puppet-dev
-    include php5-dev
+    include php5::dev
     include mongodb::dev
 	include netatalk
+	include jenkins
 }
 
 class integrationserver {
-    include cruisecontrol
+    include jenkins
     include java
 }

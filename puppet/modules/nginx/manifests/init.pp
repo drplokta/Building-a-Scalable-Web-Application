@@ -25,9 +25,9 @@ class nginx {
     
     file { "/etc/ufw/applications.d/nginx-server":
         source => "puppet:///modules/ufw/nginx-server",
+		require => Package["ufw"],
         owner  => "root",
         group  => "root",
-        notify => Service["ufw"],
     }
 
     exec { "allow-http":
