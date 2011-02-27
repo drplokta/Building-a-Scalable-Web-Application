@@ -1,5 +1,4 @@
 #!/bin/bash
-cd /home/mikes/Building-a-Scalable-Web-Application
+cd /etc
 /usr/bin/git pull origin master
-/usr/bin/puppet apply --confdir=/home/mikes/Building-a-Scalable-Web-Application/puppet /home/mikes/Building-a-Scalable-Web-Application/puppet/manifests/site.pp
-
+/usr/bin/puppet apply --confdir=/etc/puppet /etc/puppet/manifests/site.pp
